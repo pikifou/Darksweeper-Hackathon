@@ -375,6 +375,9 @@ namespace Mines.Flow
             }
             if (sweeper != null)
                 sweeper.RevealCellFog(data.x, data.y);
+
+            // --- Check if all mines are now resolved ---
+            CheckAllMinesResolved();
         }
 
         // ================================================================
@@ -470,6 +473,37 @@ namespace Mines.Flow
             if (inputHandler != null) inputHandler.inputBlocked = false;
 
             currentEvent = null;
+
+            // Check if all mines are now resolved
+            CheckAllMinesResolved();
+        }
+
+        // ================================================================
+        // Victory Check — all mines resolved
+        // ================================================================
+
+        /// <summary>
+        /// Check if every mine event has been resolved.
+        /// Sentence encounters are excluded (they are the ending, not a victory condition).
+        /// If all non-Sentence mines are resolved, triggers victory on the sweeper.
+        /// </summary>
+        private void CheckAllMinesResolved()
+        {
+            if (mineEvents == null || mineEvents.Count == 0) return;
+            if (sweeper == null) return;
+            if (sweeper.CurrentState == GameState.Won || sweeper.CurrentState == GameState.Lost) return;
+
+            foreach (var kvp in mineEvents)
+            {
+                MineEventData data = kvp.Value;
+                // Skip sentence encounters — they have their own ending flow
+                if (data.eventType == MineEventType.Sentence) continue;
+                if (data.state != MineState.Resolved) return; // at least one not resolved
+            }
+
+            // All non-Sentence mines are resolved — victory!
+            Debug.Log("[MineEvents] All mines resolved — triggering victory.");
+            sweeper.TriggerVictory();
         }
 
         // ================================================================

@@ -62,6 +62,19 @@ namespace Sweeper.Flow
         public SweeperConfig Config => config;
 
         /// <summary>
+        /// Trigger victory from an external system (e.g. MineEventController when all mines are resolved).
+        /// </summary>
+        public void TriggerVictory()
+        {
+            if (currentState == GameState.Won || currentState == GameState.Lost) return;
+
+            currentState = GameState.Won;
+            OnGameOver?.Invoke(true);
+            if (hud != null) hud.ShowVictory();
+            Debug.Log("[Sweeper] VICTORY — all mines resolved.");
+        }
+
+        /// <summary>
         /// Apply an HP change from an external system (mine events).
         /// Positive = heal, negative = damage. Clamps to [0, maxHP].
         /// </summary>
@@ -131,13 +144,7 @@ namespace Sweeper.Flow
             OnMinesRemainingChanged?.Invoke(remaining);
             if (hud != null) hud.UpdateMines(remaining);
 
-            // 7. Check if this opens a victory path
-            if (MinesweeperLogic.CheckVictory(grid))
-            {
-                currentState = GameState.Won;
-                OnGameOver?.Invoke(true);
-                if (hud != null) hud.ShowVictory();
-            }
+            // Victory is now triggered by MineEventController when all mines are resolved.
 
             Debug.Log($"[Sweeper] Mine at ({x},{y}) cleared after resolution. " +
                       $"Remaining mines: {grid.MineCount}, lit {litCells.Count} new cells.");
@@ -400,14 +407,7 @@ namespace Sweeper.Flow
             // 7. SINGLE sync point — updates lightmap, cell overlays, sparse lights
             SyncPresentationState(litCells);
 
-            // 8. Check victory
-            if (MinesweeperLogic.CheckVictory(grid))
-            {
-                currentState = GameState.Won;
-                OnGameOver?.Invoke(true);
-                if (hud != null) hud.ShowVictory();
-                Debug.Log("[Sweeper] VICTORY — all non-mine cells revealed.");
-            }
+            // Victory is now triggered by MineEventController when all mines are resolved.
         }
 
         // ==================================================================
@@ -460,14 +460,7 @@ namespace Sweeper.Flow
                     }
                 }
 
-                // Check victory
-                if (currentState == GameState.Playing && MinesweeperLogic.CheckVictory(grid))
-                {
-                    currentState = GameState.Won;
-                    OnGameOver?.Invoke(true);
-                    if (hud != null) hud.ShowVictory();
-                    Debug.Log("[Sweeper] VICTORY — all non-mine cells revealed.");
-                }
+                // Victory is now triggered by MineEventController when all mines are resolved.
                 return;
             }
 
