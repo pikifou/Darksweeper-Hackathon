@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c937f32a322e974b9504aafb98488e4, type: 3}
+  m_Name: Combat_LV3
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.CombatEncounterSO
+  monsterName: Eclat de Vide
+  description: Une fissure dans l'espace prend forme.
+  creatureForce: 5
+  isElite: 1
+  reward: 1
+  rewardValue: 5
+  videoClip: {fileID: 32900000, guid: de6c06fe3095bbf48982331e84d3a3bc, type: 3}
+  penaltyVideoClip: {fileID: 32900000, guid: 79ca9082c55cd9f429dd1f5adb282e4b, type: 3}

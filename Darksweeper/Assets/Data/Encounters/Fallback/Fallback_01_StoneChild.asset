@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_01_StoneChild
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: 04870ce27b7e15b4ea7dc3080221d890, type: 2}
+  promptText: The stone child holds out a crumbling hand. Dust falls from where fingers
+    should be. It does not speak. It only reaches.
+  choices:
+  - choiceType: 3
+    label: Take its hand
+    resultText: The stone cracks further. Warmth seeps through. You feel weaker.
+    hpDelta: -3
+    reward: 0
+    rewardValue: 0
+  - choiceType: 2
+    label: Walk past
+    resultText: It watches you leave. The dust settles where you stood.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_03_BoneMerchant
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: 4003ee585e4b3cf4c832e1aab9ecc4d5, type: 2}
+  promptText: A finger bone for a secret. A rib for safe passage. Everything has
+    a price. What do you offer?
+  choices:
+  - choiceType: 5
+    label: Offer your blood
+    resultText: The merchant grins. A thin cut, a fat reward.
+    hpDelta: -4
+    reward: 3
+    rewardValue: 3
+  - choiceType: 6
+    label: I trade with no one
+    resultText: His smile does not falter. Perhaps next time.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

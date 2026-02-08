@@ -1,0 +1,40 @@
+{
+  "gods": [
+    {
+      "id": "ash_bearer",
+      "name": "The Ash Bearer",
+      "quadrant": "Action+Empathy",
+      "actionSign": 1,
+      "empathySign": 1,
+      "primaryPhrase": "You chose to carry what others leave behind. The weight will teach you whether that was courage or pride.",
+      "secondaryPhrase": "You feel the fire, but you have not yet decided if you will burn."
+    },
+    {
+      "id": "iron_judge",
+      "name": "The Iron Judge",
+      "quadrant": "Action+Detachment",
+      "actionSign": 1,
+      "empathySign": -1,
+      "primaryPhrase": "You draw the line where others hesitate. Do not confuse resolve with blindness.",
+      "secondaryPhrase": "Order watches from the edge of your choices. It will remember what you discarded."
+    },
+    {
+      "id": "watcher_of_echoes",
+      "name": "The Watcher of Echoes",
+      "quadrant": "Inaction+Empathy",
+      "actionSign": -1,
+      "empathySign": 1,
+      "primaryPhrase": "You chose to witness what cannot be undone. Memory is the only justice you trust.",
+      "secondaryPhrase": "Something in you still listens. That silence will cost you more than you expect."
+    },
+    {
+      "id": "archivist_of_the_void",
+      "name": "The Archivist of the Void",
+      "quadrant": "Inaction+Detachment",
+      "actionSign": -1,
+      "empathySign": -1,
+      "primaryPhrase": "You chose distance. The world will test whether your clarity survives what you refuse to touch.",
+      "secondaryPhrase": "You stepped back, but your shadow did not. It still reaches toward what you abandoned."
+    }
+  ]
+}

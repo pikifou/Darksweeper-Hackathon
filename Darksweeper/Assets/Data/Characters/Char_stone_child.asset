@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542ef755a99ede74db784115e96f5f8c, type: 3}
+  m_Name: Char_stone_child
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueCharacterSO
+  characterId: stone_child
+  characterName: The Stone Child
+  descriptionForLLM: "A child whose body is made of cracked, crumbling rock \u2014
+    like an unfinished statue slowly falling apart. Luminous eyes, small, vulnerable.
+    It does not understand danger. It reaches out without knowing what it asks for."
+  axisTag: empathy
+  introClip: {fileID: 32900000, guid: db0702c2da7e3474ab427405a4641308, type: 3}

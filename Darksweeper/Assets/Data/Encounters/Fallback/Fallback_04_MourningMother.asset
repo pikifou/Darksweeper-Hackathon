@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_04_MourningMother
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: b496bf10c776bf74291280afd8d1c544, type: 2}
+  promptText: She kneels in ash. Her arms cradle nothing. She does not look up. She
+    whispers a name that is not yours.
+  choices:
+  - choiceType: 3
+    label: Kneel beside her
+    resultText: You share her silence. Something shifts in you.
+    hpDelta: -2
+    reward: 1
+    rewardValue: 1
+  - choiceType: 2
+    label: Leave her to grieve
+    resultText: Some wounds are not yours to mend. You know this.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

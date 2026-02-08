@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f9ab96924da4849a88b3a9e067c537, type: 3}
+  m_Name: SFX Library SO
+  m_EditorClassIdentifier: Assembly-CSharp::Audio.SFXLibrarySO
+  entries:
+  - id: steel
+    clip: {fileID: 8300000, guid: 9bff41990bd0ff34495a9135b159ec2d, type: 3}
+    volume: 0.594
+  - id: foot#1
+    clip: {fileID: 8300000, guid: 1309b3b1e76e6994b85bbacd4c2f1d2f, type: 3}
+    volume: 0.594
+  - id: foot#2
+    clip: {fileID: 8300000, guid: 69219dd3ee69ede43bf40bc621f323c7, type: 3}
+    volume: 0.594
+  - id: foot#3
+    clip: {fileID: 8300000, guid: 577dcc5c783541a488255ca9c9d49f6f, type: 3}
+    volume: 0.594
+  - id: foot#4
+    clip: {fileID: 8300000, guid: 4aeaf10773a52af438d18b42a3b3398c, type: 3}
+    volume: 0.594
+  - id: cave_entrance
+    clip: {fileID: 8300000, guid: ddc94156ecdfdeb4db16cb931ffc9e3d, type: 3}
+    volume: 0.594
+  - id: loop_inferno
+    clip: {fileID: 8300000, guid: 4151369b08893b345b57184ff029aeec, type: 3}
+    volume: 0.594
+  - id: ui_hover
+    clip: {fileID: 8300000, guid: 621745a49e3804a40b2f3593696e06a1, type: 3}
+    volume: 0.03
+  - id: ui_onclick
+    clip: {fileID: 8300000, guid: f2556faf10e4cab4e882ba9b1e41f363, type: 3}
+    volume: 0.666

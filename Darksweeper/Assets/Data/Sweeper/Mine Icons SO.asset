@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d0eba307e39f44883c4d95dd4e612b, type: 3}
+  m_Name: Mine Icons SO
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Presentation.MineIconsSO
+  combat: {fileID: 21300000, guid: 594b96264be89614d8d88cfd86cd641e, type: 3}
+  chest: {fileID: 21300000, guid: 059ab0f6c4ab8c144b0868ba51ab89bc, type: 3}
+  dialogue: {fileID: 21300000, guid: 35c25ef10fc4b38408505f815cca1cc7, type: 3}
+  shrine: {fileID: 21300000, guid: 6ff91e9342487eb45b50ba5add86925e, type: 3}
+  iconScale: 1
+  tint: {r: 1, g: 1, b: 1, a: 1}

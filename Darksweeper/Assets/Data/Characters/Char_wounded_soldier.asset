@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542ef755a99ede74db784115e96f5f8c, type: 3}
+  m_Name: Char_wounded_soldier
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueCharacterSO
+  characterId: wounded_soldier
+  characterName: The Wounded Soldier
+  descriptionForLLM: "A massive warrior in shattered armor, one knee on the ground,
+    a blade planted in the earth before him. Scars everywhere. He does not ask for
+    compassion \u2014 he demands that you finish what he started. His gaze is hard,
+    impatient."
+  axisTag: action
+  introClip: {fileID: 32900000, guid: b6c4d526dc9edef4481350c0d77e7893, type: 3}

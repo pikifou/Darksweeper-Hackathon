@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_08_AshPilgrim
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: 3f7d88598125062498b62c6db69aa625, type: 2}
+  promptText: I have walked since before the first fire. My feet are dust. Is there
+    a reason to continue? Tell me yours.
+  choices:
+  - choiceType: 3
+    label: Walk with me
+    resultText: Two sets of footprints. The ash falls lighter.
+    hpDelta: -3
+    reward: 3
+    rewardValue: 2
+  - choiceType: 5
+    label: Give him your purpose
+    resultText: He straightens. You feel hollow. But he walks again.
+    hpDelta: -7
+    reward: 1
+    rewardValue: 4
+  - choiceType: 2
+    label: I have no answer
+    resultText: He nods. Sits. Perhaps that is answer enough.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

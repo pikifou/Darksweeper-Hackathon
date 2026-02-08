@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_09_StoneChild_Lv2
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: 04870ce27b7e15b4ea7dc3080221d890, type: 2}
+  promptText: "The child again. This time it holds something \u2014 a shard of mirror.
+    In it, you see yourself, but wrong. It offers the shard."
+  choices:
+  - choiceType: 3
+    label: Take the mirror shard
+    resultText: The reflection blinks before you do. Knowledge at a cost.
+    hpDelta: -5
+    reward: 2
+    rewardValue: 3
+  - choiceType: 4
+    label: Shatter it
+    resultText: The child does not flinch. The shards dissolve into dust. What you
+      saw cannot be unseen.
+    hpDelta: -2
+    reward: 0
+    rewardValue: 0
+  - choiceType: 6
+    label: I know what I am
+    resultText: Do you? The child tilts its head. The mirror darkens.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

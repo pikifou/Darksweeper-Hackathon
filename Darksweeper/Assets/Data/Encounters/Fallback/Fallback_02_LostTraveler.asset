@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_02_LostTraveler
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: b43ed6a4e604231449b57acd71521b2f, type: 2}
+  promptText: Please... the path behind me is gone. Something follows. I need light,
+    or I need a blade. I have neither.
+  choices:
+  - choiceType: 3
+    label: Share your torch
+    resultText: The darkness recedes. But yours grows.
+    hpDelta: -5
+    reward: 2
+    rewardValue: 2
+  - choiceType: 6
+    label: You are not my burden
+    resultText: He nods, unsurprised. The dark takes him quietly.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd588f49a8fb0e241a585c107d937139, type: 3}
+  m_Name: EncounterPool_Default
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.EncounterPoolSO
+  combatPool:
+  - {fileID: 11400000, guid: 9c9485ca07724134899c9a540b90e458, type: 2}
+  - {fileID: 11400000, guid: 363cbd37ec4b585458930b8ff8f2856c, type: 2}
+  - {fileID: 11400000, guid: 0bf0e0a9b31407c47a076ba682c56d90, type: 2}
+  chestPool:
+  - {fileID: 11400000, guid: 1de658e4313dc2d42a5f8467aa4a63d6, type: 2}
+  - {fileID: 11400000, guid: 9b92f849b586e634384ce507b4b176aa, type: 2}
+  - {fileID: 11400000, guid: e3ea8bdc4a5dff049b58dbc08d420e4c, type: 2}
+  dialoguePool:
+  - {fileID: 11400000, guid: b1dbdd4d41fbb224a857f80fc2a87fc7, type: 2}
+  - {fileID: 11400000, guid: 508c2d995bf010646b15dd88cd5dab31, type: 2}
+  shrinePool:
+  - {fileID: 11400000, guid: 1ba4df10aa2f6e5489c06632fe205254, type: 2}
+  - {fileID: 11400000, guid: 93ffcb30fcb75e74197c46d6c0bdf027, type: 2}
+  - {fileID: 11400000, guid: 1384d3648b89ac14c82e584cc86d9853, type: 2}
+  dialoguePenaltyVideoClip: {fileID: 32900000, guid: db21f1a7c5a1b82479903574660dd63e, type: 3}
+  engageVideoClip: {fileID: 32900000, guid: 10cfd46a8616c974084d472712ac893e, type: 3}
+  openVideoClip: {fileID: 32900000, guid: f0fb60320727400499bfc5f624636b40, type: 3}
+  ignoreVideoClip: {fileID: 32900000, guid: 5e753527c009d384eb95108f39bb50d1, type: 3}
+  helpVideoClip: {fileID: 32900000, guid: 1ad72daaa0f33374c8c7214097594e20, type: 3}
+  harmVideoClip: {fileID: 32900000, guid: 98ab28284baec114788bdd3ef7385d38, type: 3}
+  sacrificeVideoClip: {fileID: 32900000, guid: e79f48dc25ace314094e0845ccb0c646, type: 3}
+  refuseVideoClip: {fileID: 32900000, guid: 4d70eed950d99b44c8a7c8ea892fb1ef, type: 3}

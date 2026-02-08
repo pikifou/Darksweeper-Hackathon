@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_06_ChainedBeast
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: e9d57b1494c20db46804f7f783b21ceb, type: 2}
+  promptText: "The chains bite. The stone holds. It growls \u2014 not in anger, but
+    in exhaustion. Its eyes track you. Waiting."
+  choices:
+  - choiceType: 3
+    label: Break the chains
+    resultText: It leaps free. For a heartbeat, it looks at you. Then it is gone.
+      Something in the dark shifts.
+    hpDelta: -6
+    reward: 2
+    rewardValue: 3
+  - choiceType: 4
+    label: Put it down
+    resultText: It does not resist. The chain rattles once, then silence.
+    hpDelta: -1
+    reward: 1
+    rewardValue: 2
+  - choiceType: 2
+    label: Not your cage
+    resultText: The growl resumes. Quieter now.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

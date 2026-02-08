@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b0008a720544444a02c72fad2e33e2, type: 3}
+  m_Name: Fallback_12_MourningMother_Lv2
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueEncounterSO
+  character: {fileID: 11400000, guid: b496bf10c776bf74291280afd8d1c544, type: 2}
+  promptText: 'She stands now. Eyes open. She holds a bundle of ash. She says: Take
+    this. Carry what I cannot. Let it weigh on someone else.'
+  choices:
+  - choiceType: 3
+    label: Take the burden
+    resultText: It is heavier than it looks. Far heavier. You feel something break
+      inside.
+    hpDelta: -10
+    reward: 3
+    rewardValue: 4
+  - choiceType: 5
+    label: Burn it for her
+    resultText: The ash falls. She watches it go. Something in her face mends. Something
+      in you doesn't.
+    hpDelta: -6
+    reward: 1
+    rewardValue: 3
+  - choiceType: 6
+    label: Carry your own grief
+    resultText: She closes her eyes. The bundle crumbles. Neither of you speak.
+    hpDelta: 0
+    reward: 0
+    rewardValue: 0

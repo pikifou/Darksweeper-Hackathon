@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd82984bc6979804ebbda51f05661570, type: 3}
+  m_Name: Music Config SO
+  m_EditorClassIdentifier: Assembly-CSharp::Audio.MusicConfigSO
+  entries:
+  - sceneName: Questionnaire
+    clip: {fileID: 8300000, guid: bf13979784c343a4d9ffbbac7b078ce9, type: 3}
+    volume: 0.563
+  - sceneName: Sweeper_LV1
+    clip: {fileID: 8300000, guid: 5cd6de9d792c4084fb609f02cce69980, type: 3}
+    volume: 0.584
+  - sceneName: Sweeper_LV2
+    clip: {fileID: 8300000, guid: 18dde97b4c4214240847f38165022a6d, type: 3}
+    volume: 0.584
+  - sceneName: Sweeper_LV3
+    clip: {fileID: 8300000, guid: af6f4bbfa8a01344abffc6022fabb622, type: 3}
+    volume: 0.584
+  fadeDuration: 1.5

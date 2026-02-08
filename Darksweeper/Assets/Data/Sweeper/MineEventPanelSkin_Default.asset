@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e2db130ece32e4e85ce24bbf2c7577, type: 3}
+  m_Name: MineEventPanelSkin_Default
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Presentation.MineEventPanelSkinSO
+  canvasSortOrder: 100
+  referenceResolution: {x: 1920, y: 1080}
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.75}
+  frameBackground: {r: 0.08, g: 0.08, b: 0.1, a: 0.95}
+  frameAnchorMin: {x: 0.25, y: 0.15}
+  frameAnchorMax: {x: 0.75, y: 0.85}
+  framePadding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  frameSpacing: 0
+  frameBorderSprite: {fileID: 0}
+  frameSpriteType: 0
+  titleColor: {r: 0, g: 0, b: 0, a: 0}
+  titleFontSize: 0
+  titleHeight: 0
+  descriptionColor: {r: 0, g: 0, b: 0, a: 0}
+  descriptionFontSize: 0
+  descriptionHeight: 0
+  buttonNormalColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonHighlightColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonPressedColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonSelectedColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonTextColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonFontSize: 0
+  buttonHeight: 0
+  buttonSprite: {fileID: 0}
+  buttonSpriteType: 0
+  resultTextColor: {r: 0, g: 0, b: 0, a: 0}
+  resultFontSize: 0
+  resultTextHeight: 0
+  resultSpacing: 0
+  hpPositiveColor: {r: 0, g: 0, b: 0, a: 0}
+  hpNegativeColor: {r: 0, g: 0, b: 0, a: 0}
+  hpDeltaFontSize: 0
+  hpDeltaHeight: 0
+  rewardColor: {r: 0, g: 0, b: 0, a: 0}
+  rewardFontSize: 0
+  rewardHeight: 0
+  continueNormalColor: {r: 0, g: 0, b: 0, a: 0}
+  continueHighlightColor: {r: 0, g: 0, b: 0, a: 0}
+  continuePressedColor: {r: 0, g: 0, b: 0, a: 0}
+  continueSelectedColor: {r: 0, g: 0, b: 0, a: 0}
+  continueTextColor: {r: 0, g: 0, b: 0, a: 0}
+  continueFontSize: 0
+  continueHeight: 0
+  continueLabel: 
+  continueSprite: {fileID: 0}
+  continueSpriteType: 0
+  titleFont: {fileID: 0}
+  bodyFont: {fileID: 0}
+  buttonFont: {fileID: 0}
+  penaltyTextColor: {r: 0, g: 0, b: 0, a: 0}
+  penaltyPrefix: 

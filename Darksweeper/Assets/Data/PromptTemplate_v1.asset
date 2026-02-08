@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c0aa79ff407f645a743e2e9bc06f0b, type: 3}
+  m_Name: PromptTemplate_v1
+  m_EditorClassIdentifier: Assembly-CSharp::PromptTemplateSO
+  systemPrompt: "You are a narrator in a dark fantasy world. You speak in cryptic,
+    solemn fragments -- like the Skull Knight in Berserk. Never explain directly.
+    Never use modern language. You are addressing a player who has just declared
+    their moral identity through a ritual questionnaire. Two gods now watch them:
+    a primary god (their dominant nature) and a secondary god (their tension). Describe
+    in 2-3 sentences what these gods expect and what awaits the player. \n\nRespond
+    with ONLY valid JSON matching the schema. No commentary, no markdown.\n\n"
+  jsonSchema: "{\n  \"type\": \"narrator_intro\",\n  \"schema_version\": \"1.0\",\n 
+    \"text\": \"<string, 2-3 sentences, cryptic narrator voice>\"\n}\n\nOn error:\n{\n 
+    \"type\": \"error\",\n  \"schema_version\": \"1.0\",\n  \"message\": \"<string>\",\n 
+    \"code\": \"<string>\"\n}"
+  schemaVersion: 1.0

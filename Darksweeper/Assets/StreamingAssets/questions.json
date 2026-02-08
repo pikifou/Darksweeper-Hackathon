@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "When you are confronted with a clear injustice:",
+      "answers": [
+        { "id": "A", "text": "You step in immediately, even if you don't fully understand the situation." },
+        { "id": "B", "text": "You act if you believe your intervention can genuinely change the outcome." },
+        { "id": "C", "text": "You are deeply affected, but you know you cannot always intervene." },
+        { "id": "D", "text": "You believe the world is full of injustice, and not all of it is your responsibility." }
+      ]
+    },
+    {
+      "id": "Q2",
+      "text": "When you witness someone else's suffering:",
+      "answers": [
+        { "id": "A", "text": "You feel it almost as if it were your own." },
+        { "id": "B", "text": "You acknowledge it, but keep emotional distance to remain effective." },
+        { "id": "C", "text": "It affects you, but you prefer not to stay exposed to it for too long." },
+        { "id": "D", "text": "You prefer not to become emotionally involved." }
+      ]
+    },
+    {
+      "id": "Q3",
+      "text": "When acting involves a real personal risk:",
+      "answers": [
+        { "id": "A", "text": "You accept the risk if it can prevent unjust suffering." },
+        { "id": "B", "text": "You take the risk only if it is rationally justified." },
+        { "id": "C", "text": "You hesitate, even if the situation deeply affects you." },
+        { "id": "D", "text": "You avoid situations where the personal cost is too high." }
+      ]
+    },
+    {
+      "id": "Q4",
+      "text": "When you choose not to act:",
+      "answers": [
+        { "id": "A", "text": "You experience it as a personal failure." },
+        { "id": "B", "text": "You accept it if it is the most coherent decision." },
+        { "id": "C", "text": "You feel a lasting sense of guilt." },
+        { "id": "D", "text": "You see no particular issue with it." }
+      ]
+    },
+    {
+      "id": "Q5",
+      "text": "When facing a complex and violent situation:",
+      "answers": [
+        { "id": "A", "text": "You want to understand it in order to intervene." },
+        { "id": "B", "text": "You want to understand it to make the best possible decision." },
+        { "id": "C", "text": "You want to understand it, even if you don't act." },
+        { "id": "D", "text": "You don't believe everything needs to be fully understood." }
+      ]
+    },
+    {
+      "id": "Q6",
+      "text": "What would make you step back permanently:",
+      "answers": [
+        { "id": "A", "text": "Becoming complicit in an injustice." },
+        { "id": "B", "text": "Acting without certainty about the consequences." },
+        { "id": "C", "text": "Losing emotional control over yourself." },
+        { "id": "D", "text": "Sacrificing your own balance for something beyond you." }
+      ]
+    }
+  ]
+}

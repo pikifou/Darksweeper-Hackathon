@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542ef755a99ede74db784115e96f5f8c, type: 3}
+  m_Name: Char_bone_merchant
+  m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.DialogueCharacterSO
+  characterId: bone_merchant
+  characterName: The Merchant of Bones
+  descriptionForLLM: "A hunched figure wrapped in a coat made of assembled bones.
+    Face hidden under a hood, except for a thin smile. He sells, he buys, he trades.
+    No emotion, no morals \u2014 only exchanges. His hands are thin, precise, inhuman."
+  axisTag: detachment
+  introClip: {fileID: 32900000, guid: 2509f856667006b4f8aafc7e0cabd4ad, type: 3}
