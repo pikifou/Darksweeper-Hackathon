@@ -37,6 +37,8 @@ namespace Sweeper.Flow
         [Min(0)] public int targetDialogue = 0;
         [Tooltip("Target number of Shrine encounters. 0 = fill from distribution weights.")]
         [Min(0)] public int targetShrine = 0;
+        [Tooltip("Target number of Sentence encounters (ending cinematics). 0 = none.")]
+        [Min(0)] public int targetSentence = 0;
 
         [Header("Gameplay")]
         [Tooltip("HP cost each time the player reveals a cell (left-click). 0 = free reveals.")]
@@ -51,10 +53,10 @@ namespace Sweeper.Flow
         public EncounterPoolSO encounterPool;
 
         /// <summary>True if any encounter type target is explicitly set.</summary>
-        public bool HasEncounterTargets => targetCombat > 0 || targetChest > 0 || targetDialogue > 0 || targetShrine > 0;
+        public bool HasEncounterTargets => targetCombat > 0 || targetChest > 0 || targetDialogue > 0 || targetShrine > 0 || targetSentence > 0;
 
         /// <summary>Sum of all encounter type targets.</summary>
-        public int TotalEncounterTargets => targetCombat + targetChest + targetDialogue + targetShrine;
+        public int TotalEncounterTargets => targetCombat + targetChest + targetDialogue + targetShrine + targetSentence;
 
         [Header("Cell Data")]
         [HideInInspector]

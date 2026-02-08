@@ -16,9 +16,15 @@ EditorBuildSettings:
     guid: ace6756add1b12944bbc7fc5a8de2a93
   - enabled: 1
     path: Assets/Scenes/Sweeper_LV2.unity
-    guid: 83bedb74068f8684f858e3ba1a70d88e
+    guid: 600a43974dd08814d9175a81c476a1b3
   - enabled: 1
     path: Assets/Scenes/Sweeper_LV3.unity
+    guid: 7cff9be5653af2b4da2f204be2a8b6e4
+  - enabled: 1
+    path: Assets/Scenes/Sweeper_LV2_.unity
+    guid: 83bedb74068f8684f858e3ba1a70d88e
+  - enabled: 1
+    path: Assets/Scenes/Sweeper_LV3_.unity
     guid: 59d9b2ba01807464a8f8be79d8cb084d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -129,9 +129,19 @@ namespace Mines.Presentation
                          ResolutionResult result, string rewardDesc,
                          bool wasLeftClickPenalty, VideoClip clip = null)
         {
+            // If already visible, snap to shown position (no re-slide)
+            bool alreadyVisible = canvas != null && canvas.enabled;
+
             StopActiveRoutine();
             EnableCanvas(false); // non-blocking for quick events
             HideChoiceButtons();
+
+            if (alreadyVisible && toastContainer != null)
+            {
+                var pos = toastContainer.anchoredPosition;
+                pos.y = shownY;
+                toastContainer.anchoredPosition = pos;
+            }
 
             PopulateIcon(eventType);
             PopulateTitle(title, wasLeftClickPenalty);
@@ -514,9 +524,12 @@ namespace Mines.Presentation
 
         private void SetupVideo(MineEventType eventType, VideoClip clip, bool freezeOnLastFrame = false)
         {
-            // Unsubscribe any previous freeze callback
+            // 1. Always fully stop and unsubscribe before changing anything
             if (videoPlayer != null)
+            {
                 videoPlayer.loopPointReached -= OnVideoFreezeOnLastFrame;
+                videoPlayer.Stop();
+            }
 
             if (clip != null && videoPlayer != null && videoImage != null)
             {
@@ -525,7 +538,7 @@ namespace Mines.Presentation
                 if (placeholderIconText != null) placeholderIconText.gameObject.SetActive(false);
                 videoImage.gameObject.SetActive(true);
 
-                videoPlayer.Stop();
+                // 2. Set new clip after stop
                 videoPlayer.clip = clip;
                 videoPlayer.time = 0;
                 videoPlayer.frame = 0;

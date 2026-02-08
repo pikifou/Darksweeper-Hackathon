@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd588f49a8fb0e241a585c107d937139, type: 3}
-  m_Name: EncounterPool_Default
+  m_Name: EncounterPool_Ending
   m_EditorClassIdentifier: Assembly-CSharp::Mines.Flow.EncounterPoolSO
   combatPool:
   - {fileID: 11400000, guid: 9c9485ca07724134899c9a540b90e458, type: 2}
@@ -37,6 +37,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1ba4df10aa2f6e5489c06632fe205254, type: 2}
   - {fileID: 11400000, guid: 93ffcb30fcb75e74197c46d6c0bdf027, type: 2}
   - {fileID: 11400000, guid: 1384d3648b89ac14c82e584cc86d9853, type: 2}
+  sentencePool:
+  - {fileID: 11400000, guid: 1eef440f1b35b154cbfa8b5a62b9cda8, type: 2}
+  - {fileID: 11400000, guid: 1eef440f1b35b154cbfa8b5a62b9cda8, type: 2}
   dialoguePenaltyVideoClip: {fileID: 32900000, guid: db21f1a7c5a1b82479903574660dd63e, type: 3}
   engageVideoClip: {fileID: 32900000, guid: 10cfd46a8616c974084d472712ac893e, type: 3}
   openVideoClip: {fileID: 32900000, guid: f0fb60320727400499bfc5f624636b40, type: 3}

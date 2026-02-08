@@ -9,6 +9,7 @@ namespace Mines.Data
         Combat,
         Chest,
         Dialogue,
-        Shrine
+        Shrine,
+        Sentence
     }
 }

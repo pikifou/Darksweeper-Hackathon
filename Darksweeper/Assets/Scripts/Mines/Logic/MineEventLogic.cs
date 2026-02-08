@@ -88,6 +88,7 @@ namespace Mines.Logic
         public static Dictionary<(int, int), MineEventData> AssignEventsWithTargets(
             GridModel grid,
             int targetCombat, int targetChest, int targetDialogue, int targetShrine,
+            int targetSentence,
             Dictionary<(int, int), MineEventType> forcedTypes,
             MineDistributionSO distribution,
             EncounterPoolSO pool)
@@ -115,6 +116,7 @@ namespace Mines.Logic
             int remainChest = targetChest;
             int remainDialogue = targetDialogue;
             int remainShrine = targetShrine;
+            int remainSentence = targetSentence;
             if (forcedTypes != null)
             {
                 foreach (var kvp in forcedTypes)
@@ -125,6 +127,7 @@ namespace Mines.Logic
                         case MineEventType.Chest: remainChest = Mathf.Max(0, remainChest - 1); break;
                         case MineEventType.Dialogue: remainDialogue = Mathf.Max(0, remainDialogue - 1); break;
                         case MineEventType.Shrine: remainShrine = Mathf.Max(0, remainShrine - 1); break;
+                        case MineEventType.Sentence: remainSentence = Mathf.Max(0, remainSentence - 1); break;
                     }
                 }
             }
@@ -135,6 +138,7 @@ namespace Mines.Logic
             for (int i = 0; i < remainChest; i++) typeList.Add(MineEventType.Chest);
             for (int i = 0; i < remainDialogue; i++) typeList.Add(MineEventType.Dialogue);
             for (int i = 0; i < remainShrine; i++) typeList.Add(MineEventType.Shrine);
+            for (int i = 0; i < remainSentence; i++) typeList.Add(MineEventType.Sentence);
 
             int specifiedCount = typeList.Count;
             int totalFree = freePositions.Count;
@@ -254,6 +258,12 @@ namespace Mines.Logic
                         new ChoiceOption { choice = PlayerChoice.Sacrifice, label = $"Sacrifier ({sp.sacrificeCost} PV)", riskHint = "sacrifice" },
                         new ChoiceOption { choice = PlayerChoice.Refuse, label = "Refuser", riskHint = "" }
                     };
+                    break;
+
+                case MineEventType.Sentence:
+                    desc.title = "Sentence";
+                    desc.description = "La sentence finale.";
+                    desc.choices = System.Array.Empty<ChoiceOption>();
                     break;
             }
 
@@ -427,7 +437,7 @@ namespace Mines.Logic
             EncounterPoolSO pool)
         {
             // Count per type
-            int combatCount = 0, chestCount = 0, dialogueCount = 0, shrineCount = 0;
+            int combatCount = 0, chestCount = 0, dialogueCount = 0, shrineCount = 0, sentenceCount = 0;
             foreach (var (_, _, type) in mines)
             {
                 switch (type)
@@ -436,6 +446,7 @@ namespace Mines.Logic
                     case MineEventType.Chest: chestCount++; break;
                     case MineEventType.Dialogue: dialogueCount++; break;
                     case MineEventType.Shrine: shrineCount++; break;
+                    case MineEventType.Sentence: sentenceCount++; break;
                 }
             }
 
@@ -448,10 +459,12 @@ namespace Mines.Logic
                 ? DrawFromPool(pool.dialoguePool, dialogueCount) : new DialogueEncounterSO[dialogueCount];
             ShrineEncounterSO[] drawnShrines = pool != null
                 ? DrawFromPool(pool.shrinePool, shrineCount) : new ShrineEncounterSO[shrineCount];
+            SentenceEncounterSO[] drawnSentences = pool != null
+                ? DrawFromPool(pool.sentencePool, sentenceCount) : new SentenceEncounterSO[sentenceCount];
 
             // Map back to mine order
             var result = new object[mines.Count];
-            int ci = 0, chi = 0, di = 0, si = 0;
+            int ci = 0, chi = 0, di = 0, si = 0, sei = 0;
             for (int i = 0; i < mines.Count; i++)
             {
                 switch (mines[i].type)
@@ -460,6 +473,7 @@ namespace Mines.Logic
                     case MineEventType.Chest: result[i] = drawnChests[chi++]; break;
                     case MineEventType.Dialogue: result[i] = drawnDialogues[di++]; break;
                     case MineEventType.Shrine: result[i] = drawnShrines[si++]; break;
+                    case MineEventType.Sentence: result[i] = drawnSentences[sei++]; break;
                 }
             }
 
@@ -535,6 +549,10 @@ namespace Mines.Logic
 
                 case MineEventType.Dialogue:
                     var dialogueSO = drawnSO as DialogueEncounterSO;
+                    Debug.Log($"[MineEventLogic] Dialogue SO: {(dialogueSO != null ? dialogueSO.name : "NULL")}, " +
+                              $"character={(dialogueSO?.character != null ? dialogueSO.character.characterId : "NULL")}, " +
+                              $"prompt='{dialogueSO?.promptText ?? "NULL"}', " +
+                              $"choices={dialogueSO?.choices?.Length ?? 0}");
                     if (dialogueSO != null)
                     {
                         var dialogueChoices = new List<DialogueChoice>();
@@ -610,6 +628,14 @@ namespace Mines.Logic
                             reward = shrineReward,
                             rewardValue = shrineRewardValue
                         };
+                    }
+                    break;
+
+                case MineEventType.Sentence:
+                    var sentenceSO = drawnSO as SentenceEncounterSO;
+                    if (sentenceSO != null)
+                    {
+                        data.videoClip = sentenceSO.videoClip;
                     }
                     break;
             }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Mines.Data;
 using Mines.Logic;
@@ -6,6 +7,7 @@ using Sweeper.Data;
 using Sweeper.Flow;
 using Sweeper.Presentation;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 namespace Mines.Flow
@@ -28,6 +30,14 @@ namespace Mines.Flow
         [SerializeField] private MineEventToast toast;
         [SerializeField] private GridRenderer gridRenderer;
 
+        [Header("Sentence Ending (LV3)")]
+        [Tooltip("Canvas (Screen Space - Overlay, high sort order) for fullscreen sentence endings. Starts disabled.")]
+        [SerializeField] private Canvas sentenceCanvas;
+        [Tooltip("RawImage filling the canvas — receives the VideoPlayer RenderTexture.")]
+        [SerializeField] private RawImage sentenceVideoDisplay;
+        [Tooltip("VideoPlayer for sentence ending videos.")]
+        [SerializeField] private VideoPlayer sentenceVideoPlayer;
+
         [Header("Configuration")]
         [SerializeField] private MineDistributionSO distribution;
         [Tooltip("Fallback encounter pool used when levelData has no pool assigned.")]
@@ -39,10 +49,20 @@ namespace Mines.Flow
         private Dictionary<(int, int), MineEventData> mineEvents;
         private RunLog runLog = new();
         private MineEventData currentEvent;    // event currently in DIALOGUE flow (null otherwise)
+        private RenderTexture sentenceRenderTexture; // created at runtime for sentence video
 
         // ================================================================
         // Lifecycle
         // ================================================================
+
+        private void Awake()
+        {
+            // Ensure the sentence ending canvas is hidden at start
+            if (sentenceCanvas != null)
+                sentenceCanvas.enabled = false;
+            if (sentenceVideoDisplay != null)
+                sentenceVideoDisplay.gameObject.SetActive(false);
+        }
 
         private void OnEnable()
         {
@@ -114,6 +134,7 @@ namespace Mines.Flow
                             CellTag.Chest    => MineEventType.Chest,
                             CellTag.Dialogue => MineEventType.Dialogue,
                             CellTag.Shrine   => MineEventType.Shrine,
+                            CellTag.Sentence => MineEventType.Sentence,
                             _                => MineEventType.Combat
                         };
                         forcedTypes[(x, y)] = eventType;
@@ -128,6 +149,7 @@ namespace Mines.Flow
                 mineEvents = MineEventLogic.AssignEventsWithTargets(
                     grid, levelData.targetCombat, levelData.targetChest,
                     levelData.targetDialogue, levelData.targetShrine,
+                    levelData.targetSentence,
                     forcedTypes, distribution, pool);
             }
             else
@@ -157,35 +179,40 @@ namespace Mines.Flow
 
             Debug.Log($"[MineEvents] RightClick ({x},{y}): type={data.eventType}");
 
+            if (data.eventType == MineEventType.Sentence)
+            {
+                // --- SENTENCE: fullscreen ending video, no dialogue panel ---
+                if (inputHandler != null) inputHandler.inputBlocked = true;
+                data.state = MineState.Resolved;
+                PlaySentenceEnding(data.videoClip);
+                Debug.Log($"[MineEvents] Sentence at ({x},{y}) — launching fullscreen ending video.");
+                return;
+            }
+
             if (data.eventType == MineEventType.Dialogue)
             {
-                // --- DIALOGUE: two-phase toast (intro video + choices → result video + outcome) ---
+                // --- DIALOGUE: modal panel with intro video + choices → result → continue ---
                 currentEvent = data;
                 if (inputHandler != null) inputHandler.inputBlocked = true;
+
+                var dpLog = data.dialogueParams;
+                Debug.Log($"[MineEvents] Dialogue data: character='{dpLog?.characterName ?? "NULL"}', " +
+                          $"prompt='{dpLog?.promptText ?? "NULL"}', " +
+                          $"choices={dpLog?.choices?.Length ?? 0}, " +
+                          $"characterSO={(dpLog?.character != null ? dpLog.character.characterId : "NULL")}");
 
                 InteractionDescriptor descriptor = MineEventLogic.GetInteraction(data);
                 VideoClip introClip = data.videoClip; // intro clip comes from the character SO
 
-                if (toast != null)
+                if (panel != null)
                 {
-                    toast.ShowDialogue(descriptor, introClip, OnDialogueChoice);
-
-                    // Pass result video clips for each choice button (looked up from the pool by action type)
-                    EncounterPoolSO pool = GetActivePool();
-                    var dp = data.dialogueParams;
-                    if (dp?.choices != null && pool != null)
-                    {
-                        var clips = new VideoClip[dp.choices.Length];
-                        for (int i = 0; i < dp.choices.Length; i++)
-                            clips[i] = pool.GetActionResultClip(dp.choices[i].choiceType);
-                        toast.SetChoiceResultClips(clips);
-                    }
+                    panel.Show(descriptor, OnPanelDialogueChoice, introClip);
                 }
                 else
                 {
-                    // No toast — auto-pick first choice
+                    // No panel — auto-pick first choice
                     if (descriptor.choices != null && descriptor.choices.Length > 0)
-                        OnDialogueChoice(descriptor.choices[0].choice, null);
+                        OnPanelDialogueChoice(descriptor.choices[0].choice);
                 }
             }
             else
@@ -355,10 +382,10 @@ namespace Mines.Flow
         // ================================================================
 
         /// <summary>
-        /// Player picked a choice in the dialogue toast.
-        /// Resolves the dialogue, applies effects, then shows the result phase on the toast.
+        /// Player picked a choice in the dialogue panel.
+        /// Resolves the dialogue, applies effects, then shows the result on the panel.
         /// </summary>
-        private void OnDialogueChoice(PlayerChoice choice, VideoClip resultClip)
+        private void OnPanelDialogueChoice(PlayerChoice choice)
         {
             if (currentEvent == null) return;
 
@@ -406,19 +433,26 @@ namespace Mines.Flow
             Debug.Log($"[MineEvents] Dialogue resolved at ({currentEvent.x},{currentEvent.y}): " +
                       $"choice={choice}, hpDelta={result.hpDelta}, reward={result.reward}");
 
-            // Show result phase on the toast, then OnDialogueDismiss
-            if (toast != null)
-                toast.ShowDialogueResult(result, rewardDesc, resultClip, OnDialogueDismiss);
+            // Look up the generic result video for this action type
+            EncounterPoolSO pool = GetActivePool();
+            VideoClip resultClip = pool != null ? pool.GetActionResultClip(choice) : null;
+
+            // Show result on the panel, then OnPanelContinue when the player clicks Continue
+            if (panel != null)
+                panel.ShowResult(result, rewardDesc, false, OnPanelContinue, resultClip);
             else
-                OnDialogueDismiss();
+                OnPanelContinue();
         }
 
         /// <summary>
-        /// Called when the dialogue toast auto-dismisses after the result phase.
-        /// Shows resolved icon, lifts fog, unblocks input.
+        /// Called when the player clicks Continue on the dialogue panel.
+        /// Hides the panel, shows resolved icon, lifts fog, unblocks input.
         /// </summary>
-        private void OnDialogueDismiss()
+        private void OnPanelContinue()
         {
+            // Hide the panel
+            if (panel != null) panel.Hide();
+
             // Show resolved icon and lift fog on that one cell
             if (currentEvent != null)
             {
@@ -436,6 +470,76 @@ namespace Mines.Flow
             if (inputHandler != null) inputHandler.inputBlocked = false;
 
             currentEvent = null;
+        }
+
+        // ================================================================
+        // Sentence Ending (fullscreen video)
+        // ================================================================
+
+        /// <summary>
+        /// Play a fullscreen ending video for a sentence encounter.
+        /// Activates the sentence canvas, sets up a RenderTexture, and plays the clip.
+        /// The video stays on screen — this is the game ending.
+        /// </summary>
+        private void PlaySentenceEnding(VideoClip clip)
+        {
+            if (sentenceVideoPlayer == null || sentenceCanvas == null)
+            {
+                Debug.LogWarning("[MineEvents] Sentence canvas or video player not assigned. Cannot play ending.");
+                return;
+            }
+
+            if (clip == null)
+            {
+                Debug.LogWarning("[MineEvents] Sentence encounter has no video clip assigned.");
+                return;
+            }
+
+            // Activate fullscreen canvas
+            sentenceCanvas.enabled = true;
+
+            // Create RenderTexture at screen resolution
+            sentenceRenderTexture = new RenderTexture(Screen.width, Screen.height, 0);
+            sentenceRenderTexture.Create();
+
+            // Configure VideoPlayer
+            sentenceVideoPlayer.clip = clip;
+            sentenceVideoPlayer.renderMode = VideoRenderMode.RenderTexture;
+            sentenceVideoPlayer.targetTexture = sentenceRenderTexture;
+            sentenceVideoPlayer.isLooping = false;
+            sentenceVideoPlayer.playOnAwake = false;
+            sentenceVideoPlayer.audioOutputMode = VideoAudioOutputMode.Direct;
+
+            // Assign to display
+            if (sentenceVideoDisplay != null)
+            {
+                sentenceVideoDisplay.texture = sentenceRenderTexture;
+                sentenceVideoDisplay.gameObject.SetActive(true);
+            }
+
+            // Pause on last frame when done
+            sentenceVideoPlayer.loopPointReached += OnSentenceVideoFinished;
+            sentenceVideoPlayer.Play();
+
+            Debug.Log($"[MineEvents] Playing sentence ending video: {clip.name}");
+        }
+
+        private void OnSentenceVideoFinished(VideoPlayer vp)
+        {
+            // Pause so the last frame stays visible (this is the ending screen)
+            vp.Pause();
+            vp.loopPointReached -= OnSentenceVideoFinished;
+            Debug.Log("[MineEvents] Sentence ending video finished — paused on last frame.");
+        }
+
+        private void OnDestroy()
+        {
+            if (sentenceRenderTexture != null)
+            {
+                sentenceRenderTexture.Release();
+                Destroy(sentenceRenderTexture);
+                sentenceRenderTexture = null;
+            }
         }
 
         // ================================================================

@@ -120,14 +120,17 @@ namespace Mines.Presentation
             if (resultArea != null) resultArea.gameObject.SetActive(false);
         }
 
-        /// <summary>Show the result after resolution.</summary>
-        public void ShowResult(ResolutionResult result, string rewardDescription, bool wasLeftClickPenalty, Action onContinue)
+        /// <summary>Show the result after resolution, with an optional result video.</summary>
+        public void ShowResult(ResolutionResult result, string rewardDescription, bool wasLeftClickPenalty, Action onContinue, VideoClip resultClip = null)
         {
             onContinueCallback = onContinue;
 
             // Hide choice buttons
             for (int i = 0; i < MaxChoices; i++)
                 choiceButtons[i].gameObject.SetActive(false);
+
+            // Play result video (replaces the intro freeze frame)
+            PlayResultVideo(resultClip);
 
             // Show result area
             if (resultArea != null) resultArea.gameObject.SetActive(true);
@@ -201,28 +204,27 @@ namespace Mines.Presentation
         {
             if (videoPlayer == null) return;
 
+            // 1. Always fully stop and unsubscribe first
+            videoPlayer.loopPointReached -= OnIntroVideoFinished;
+            videoPlayer.Stop();
+
             if (clip == null)
             {
                 // No clip — hide the video area
                 if (videoDisplay != null) videoDisplay.gameObject.SetActive(false);
-                videoPlayer.Stop();
                 return;
             }
 
             // Show the video display
             if (videoDisplay != null) videoDisplay.gameObject.SetActive(true);
 
-            // Configure: play once, no loop
-            videoPlayer.isLooping = false;
+            // 2. Set new clip after stop, reset to first frame
             videoPlayer.clip = clip;
-
-            // Reset to beginning
-            videoPlayer.Stop();
+            videoPlayer.isLooping = false;
             videoPlayer.time = 0;
             videoPlayer.frame = 0;
 
             // Subscribe to end-of-clip to pause on last frame
-            videoPlayer.loopPointReached -= OnIntroVideoFinished;
             videoPlayer.loopPointReached += OnIntroVideoFinished;
 
             videoPlayer.Play();
@@ -233,6 +235,31 @@ namespace Mines.Presentation
             // Pause so the last frame stays visible
             vp.Pause();
             vp.loopPointReached -= OnIntroVideoFinished;
+        }
+
+        /// <summary>
+        /// Play a result video (looping) after the player makes a choice.
+        /// If no clip is provided, keeps the current frame (intro freeze).
+        /// </summary>
+        private void PlayResultVideo(VideoClip clip)
+        {
+            if (videoPlayer == null) return;
+
+            if (clip == null) return; // keep the intro freeze frame
+
+            // 1. Fully stop and unsubscribe first
+            videoPlayer.loopPointReached -= OnIntroVideoFinished;
+            videoPlayer.Stop();
+
+            // Show the video display
+            if (videoDisplay != null) videoDisplay.gameObject.SetActive(true);
+
+            // 2. Set new clip after stop, reset to first frame
+            videoPlayer.clip = clip;
+            videoPlayer.time = 0;
+            videoPlayer.frame = 0;
+            videoPlayer.isLooping = true;
+            videoPlayer.Play();
         }
 
         private void StopVideo()

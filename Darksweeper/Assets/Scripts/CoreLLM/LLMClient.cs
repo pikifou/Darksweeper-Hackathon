@@ -10,23 +10,25 @@ using UnityEngine.Networking;
 /// </summary>
 public static class LLMClient
 {
-    private const int TimeoutSeconds = 30;
+    private const int DefaultTimeoutSeconds = 30;
 
     /// <summary>
     /// Sends the request and calls onSuccess with the raw response body,
     /// or onError with an error message.
     /// </summary>
+    /// <param name="timeoutSeconds">Request timeout in seconds. 0 = use default (30s).</param>
     public static IEnumerator SendRequest(string jsonBody, LLMConfigSO config,
-        Action<string> onSuccess, Action<string> onError)
+        Action<string> onSuccess, Action<string> onError, int timeoutSeconds = 0)
     {
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
+        int timeout = timeoutSeconds > 0 ? timeoutSeconds : DefaultTimeoutSeconds;
 
         using var request = new UnityWebRequest(config.endpoint, "POST");
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("Authorization", $"Bearer {config.apiKey}");
-        request.timeout = TimeoutSeconds;
+        request.timeout = timeout;
 
         Debug.Log("[LLMClient] Sending request...");
 

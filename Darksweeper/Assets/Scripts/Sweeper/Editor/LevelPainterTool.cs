@@ -20,7 +20,7 @@ namespace Sweeper.Editor
     ///   Left click/drag  = paint current brush
     ///   Right click/drag  = erase (set to Empty)
     ///   Shift + drag      = box fill
-    ///   1=Empty, 2=Entry, 3=Inactive, 4=Safe, 5=Mine, 6=Combat, 7=Chest, 8=Dialogue, 9=Shrine
+    ///   1=Empty, 2=Entry, 3=Inactive, 4=Safe, 5=Mine, 6=Combat, 7=Chest, 8=Dialogue, 9=Shrine, 0=Sentence
     ///   Escape            = deactivate painter
     /// </summary>
     public static class LevelPainterTool
@@ -47,11 +47,12 @@ namespace Sweeper.Editor
         private static readonly Color ColorChest    = new Color(1f, 0.85f, 0.2f, 0.55f);
         private static readonly Color ColorDialogue = new Color(0.3f, 0.7f, 1f, 0.55f);
         private static readonly Color ColorShrine   = new Color(0.7f, 0.3f, 1f, 0.55f);
+        private static readonly Color ColorSentence = new Color(1f, 0.5f, 0f, 0.7f);
         private static readonly Color GridLineColor   = new Color(1f, 1f, 1f, 0.15f);
         private static readonly Color GridBoundsColor = new Color(0.4f, 0.9f, 0.4f, 0.6f);
 
         // Label shortcuts for cell overlays (indexed by CellTag int value)
-        private static readonly string[] TagLabels = { "", "E", "", "S", "M", "Co", "Ch", "Di", "Sh" };
+        private static readonly string[] TagLabels = { "", "E", "", "S", "M", "Co", "Ch", "Di", "Sh", "Se" };
 
         [MenuItem("DarkSweeper/Level Painter (Toggle)")]
         public static void TogglePainter()
@@ -413,6 +414,10 @@ namespace Sweeper.Editor
                     currentBrush = CellTag.Shrine;
                     Debug.Log("[LevelPainter] Brush: Shrine");
                     e.Use(); break;
+                case KeyCode.Alpha0: case KeyCode.Keypad0:
+                    currentBrush = CellTag.Sentence;
+                    Debug.Log("[LevelPainter] Brush: Sentence (ending)");
+                    e.Use(); break;
                 case KeyCode.Escape:
                     Deactivate();
                     Debug.Log("[LevelPainter] Deactivated.");
@@ -426,7 +431,7 @@ namespace Sweeper.Editor
         {
             Handles.BeginGUI();
 
-            float toolbarWidth = 580f;
+            float toolbarWidth = 660f;
             float toolbarHeight = 120f;
             Rect rect = new Rect(10, 10, toolbarWidth, toolbarHeight);
 
@@ -452,6 +457,7 @@ namespace Sweeper.Editor
             DrawBrushButton("7:Chest", CellTag.Chest);
             DrawBrushButton("8:Dialog", CellTag.Dialogue);
             DrawBrushButton("9:Shrine", CellTag.Shrine);
+            DrawBrushButton("0:Sentence", CellTag.Sentence);
             GUILayout.EndHorizontal();
 
             // Stats
@@ -463,7 +469,8 @@ namespace Sweeper.Editor
                            $"Co:{activeLevelData.CountTag(CellTag.Combat)} " +
                            $"Ch:{activeLevelData.CountTag(CellTag.Chest)} " +
                            $"Di:{activeLevelData.CountTag(CellTag.Dialogue)} " +
-                           $"Sh:{activeLevelData.CountTag(CellTag.Shrine)}) | " +
+                           $"Sh:{activeLevelData.CountTag(CellTag.Shrine)} " +
+                           $"Se:{activeLevelData.CountTag(CellTag.Sentence)}) | " +
                            $"Safe: {safe} | Inact: {inactive} | Entry: {entry}",
                 EditorStyles.miniLabel);
 
@@ -532,6 +539,7 @@ namespace Sweeper.Editor
                 CellTag.Chest    => ColorChest,
                 CellTag.Dialogue => ColorDialogue,
                 CellTag.Shrine   => ColorShrine,
+                CellTag.Sentence => ColorSentence,
                 _                => ColorEmpty,
             };
         }

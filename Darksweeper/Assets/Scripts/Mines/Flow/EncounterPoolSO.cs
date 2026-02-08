@@ -33,6 +33,10 @@ namespace Mines.Flow
         [Tooltip("Pool of shrine encounters. Each shrine mine draws one.")]
         public ShrineEncounterSO[] shrinePool = new ShrineEncounterSO[0];
 
+        [Header("Sentence Encounters")]
+        [Tooltip("Pool of sentence encounters (final endings). Each sentence mine draws one.")]
+        public SentenceEncounterSO[] sentencePool = new SentenceEncounterSO[0];
+
         [Header("Generic Videos (shared across all encounters)")]
         [Tooltip("Penalty video shown when the player left-clicks a dialogue mine by mistake.")]
         public VideoClip dialoguePenaltyVideoClip;
@@ -71,6 +75,7 @@ namespace Mines.Flow
             (combatPool != null && combatPool.Length > 0) ||
             (chestPool != null && chestPool.Length > 0) ||
             (dialoguePool != null && dialoguePool.Length > 0) ||
-            (shrinePool != null && shrinePool.Length > 0);
+            (shrinePool != null && shrinePool.Length > 0) ||
+            (sentencePool != null && sentencePool.Length > 0);
     }
 }

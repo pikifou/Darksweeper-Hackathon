@@ -29,6 +29,9 @@ public class DialogueGeneratorService : MonoBehaviour
     [Tooltip("Max tokens override for dialogue generation (default 8192). Set to 0 to use the LLMConfig value.")]
     [SerializeField] private int maxTokensOverride = 8192;
 
+    [Tooltip("Timeout in seconds for the dialogue generation LLM request. Default 120s (generating 12 dialogues is slow).")]
+    [SerializeField] private int timeoutSeconds = 120;
+
     [Header("Fallback (offline / LLM failure)")]
     [Tooltip("12 pre-made DialogueEncounterSO assets (4 for level 1, 8 for level 2).")]
     [SerializeField] private DialogueEncounterSO[] fallbackDialogues;
@@ -140,7 +143,8 @@ public class DialogueGeneratorService : MonoBehaviour
 
         yield return LLMClient.SendRequest(requestBody, llmConfig,
             onSuccess: (response) => { rawResponse = response; done = true; },
-            onError: (err) => { error = err; done = true; });
+            onError: (err) => { error = err; done = true; },
+            timeoutSeconds: timeoutSeconds);
 
         // Wait for completion (should already be done after yield)
         while (!done) yield return null;

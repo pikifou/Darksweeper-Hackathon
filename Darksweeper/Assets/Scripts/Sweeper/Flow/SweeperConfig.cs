@@ -14,7 +14,7 @@ namespace Sweeper.Flow
         public int mineCount = 15;
 
         [Header("Player")]
-        public int hpStart = 100;
+        public int hpStart = 300;
 
         [Header("Reveal + Light")]
         [Tooltip("Cells within this distance are fully illuminated (binary: 1.0). Fog edge is handled by the shader.")]

@@ -67,7 +67,8 @@ namespace Sweeper.Editor
                     int chest = levelData.CountTag(CellTag.Chest);
                     int dialogue = levelData.CountTag(CellTag.Dialogue);
                     int shrine = levelData.CountTag(CellTag.Shrine);
-                    int mines = mineGeneric + combat + chest + dialogue + shrine; // total encounters
+                    int sentence = levelData.CountTag(CellTag.Sentence);
+                    int mines = mineGeneric + combat + chest + dialogue + shrine + sentence; // total encounters
                     int inactive = levelData.CountTag(CellTag.Inactive);
                     int safe = levelData.CountTag(CellTag.Safe);
                     int entry = levelData.CountTag(CellTag.Entry);
@@ -90,6 +91,7 @@ namespace Sweeper.Editor
                     DrawStatLabel("Chest", chest, new Color(1f, 0.85f, 0.3f));
                     DrawStatLabel("Dialogue", dialogue, new Color(0.5f, 0.8f, 1f));
                     DrawStatLabel("Shrine", shrine, new Color(0.8f, 0.5f, 1f));
+                    DrawStatLabel("Sentence", sentence, new Color(1f, 0.5f, 0f));
                     EditorGUILayout.EndHorizontal();
 
                     EditorGUILayout.LabelField($"Total painted encounters: {mines}",
@@ -164,6 +166,7 @@ namespace Sweeper.Editor
                     DrawStatLabel("Chest", levelData.targetChest, new Color(1f, 0.85f, 0.3f));
                     DrawStatLabel("Dialogue", levelData.targetDialogue, new Color(0.5f, 0.8f, 1f));
                     DrawStatLabel("Shrine", levelData.targetShrine, new Color(0.8f, 0.5f, 1f));
+                    DrawStatLabel("Sentence", levelData.targetSentence, new Color(1f, 0.5f, 0f));
                     EditorGUILayout.EndHorizontal();
 
                     // Sum line
@@ -208,12 +211,14 @@ namespace Sweeper.Editor
                     int poolCh = pool.chestPool != null ? pool.chestPool.Length : 0;
                     int poolD = pool.dialoguePool != null ? pool.dialoguePool.Length : 0;
                     int poolS = pool.shrinePool != null ? pool.shrinePool.Length : 0;
+                    int poolSe = pool.sentencePool != null ? pool.sentencePool.Length : 0;
 
                     EditorGUILayout.BeginHorizontal();
                     DrawStatLabel("Pool Combat", poolC, poolC > 0 ? new Color(0.5f, 1f, 0.5f) : new Color(1f, 0.5f, 0.5f));
                     DrawStatLabel("Pool Chest", poolCh, poolCh > 0 ? new Color(0.5f, 1f, 0.5f) : new Color(1f, 0.5f, 0.5f));
                     DrawStatLabel("Pool Dialogue", poolD, poolD > 0 ? new Color(0.5f, 1f, 0.5f) : new Color(1f, 0.5f, 0.5f));
                     DrawStatLabel("Pool Shrine", poolS, poolS > 0 ? new Color(0.5f, 1f, 0.5f) : new Color(1f, 0.5f, 0.5f));
+                    DrawStatLabel("Pool Sentence", poolSe, poolSe > 0 ? new Color(0.5f, 1f, 0.5f) : new Color(1f, 0.5f, 0.5f));
                     EditorGUILayout.EndHorizontal();
                 }
 
